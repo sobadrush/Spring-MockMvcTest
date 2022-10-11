@@ -1,6 +1,8 @@
 package com.rogerlo.demo.springmockmvctest.controller;
 
+import com.rogerlo.demo.springmockmvctest.dao.ProductDao;
 import com.rogerlo.demo.springmockmvctest.model.ProductVO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,19 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("/ProductController")
 @Scope(BeanDefinition.SCOPE_SINGLETON)
 public class ProductController {
 
-    private List<ProductVO> productList = Stream.of(
-            ProductVO.builder().id(101).name("滑鼠").price(Double.valueOf(33.5)).build(),
-            ProductVO.builder().id(102).name("鍵盤").price(Double.valueOf(55.66)).build(),
-            ProductVO.builder().id(103).name("耳機").price(Double.valueOf(13)).build()
-    ).collect(Collectors.toList());
+    @Autowired
+    private ProductDao productDao;
 
     @RequestMapping("/hello")
     public String hello() {
@@ -32,23 +29,26 @@ public class ProductController {
 
     @GetMapping("/getAllProducts")
     public List<ProductVO> getAllProducts() {
-        return this.productList;
+        return productDao.getAllProducts();
     }
 
     @GetMapping("/getProduct/{prodId}")
     public ProductVO getProduct(@PathVariable("prodId") int prodId) {
-        return this.productList.parallelStream().filter(x -> x.getId() == prodId).findFirst().orElse(null);
+        return productDao.getAllProducts()
+                .parallelStream().filter(x -> x.getId() == prodId)
+                .findFirst()
+                .orElse(null);
     }
 
     @DeleteMapping("/delete/{prodId}")
     public boolean delete(@PathVariable("prodId") int prodId) {
         System.err.println("delete product id: " + prodId);
         AtomicBoolean deleteFlag = new AtomicBoolean(false);
-        this.productList.parallelStream().filter(pVO -> pVO.getId() == prodId)
+        productDao.getAllProducts().parallelStream().filter(pVO -> pVO.getId() == prodId)
                 .findAny()
                 .ifPresent(pVO -> {
                     deleteFlag.set(true);
-                    this.productList.remove(pVO);
+                    productDao.getAllProducts().remove(pVO);
                 });
 
         if (deleteFlag.get()) {

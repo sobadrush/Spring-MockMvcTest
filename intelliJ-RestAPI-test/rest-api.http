@@ -6,6 +6,10 @@ Content-Type: application/json
 GET http://localhost:8080/ProductController/getAllProducts
 Content-Type: application/json
 
+### 測試 GET: getProductById
+GET http://localhost:8080/ProductController/getProduct/102
+Content-Type: application/json
+
 ### 測試 DELETE: deleteById
 DELETE http://localhost:8080/ProductController/delete/101
 Content-Type: application/json

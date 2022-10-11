@@ -35,6 +35,11 @@ public class ProductController {
         return this.productList;
     }
 
+    @GetMapping("/getProduct/{prodId}")
+    public ProductVO getProduct(@PathVariable("prodId") int prodId) {
+        return this.productList.parallelStream().filter(x -> x.getId() == prodId).findFirst().orElse(null);
+    }
+
     @DeleteMapping("/delete/{prodId}")
     public boolean delete(@PathVariable("prodId") int prodId) {
         System.err.println("delete product id: " + prodId);

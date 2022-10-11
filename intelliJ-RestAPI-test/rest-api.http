@@ -1,0 +1,11 @@
+### 測試 POST: Hello
+POST http://localhost:8080/ProductController/hello
+Content-Type: application/json
+
+### 測試 GET: getAllProducts
+GET http://localhost:8080/ProductController/getAllProducts
+Content-Type: application/json
+
+### 測試 DELETE: deleteById
+DELETE http://localhost:8080/ProductController/delete/101
+Content-Type: application/json

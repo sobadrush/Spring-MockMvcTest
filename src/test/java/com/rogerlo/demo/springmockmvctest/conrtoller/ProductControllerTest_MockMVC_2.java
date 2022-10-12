@@ -31,6 +31,7 @@ public class ProductControllerTest_MockMVC_2 {
     @Autowired
     private MockMvc mockMvc;
 
+    // SpyBean 和 MockBean 生成的對象受 spring 管理，相當於自動替換對應類型 bean 的注入
     @MockBean // 使用 mock 建立物件並自動裝配
     // @SpyBean // 使用 spy 建立物件並自動裝配
     private ProductDao productDao;
@@ -53,6 +54,7 @@ public class ProductControllerTest_MockMVC_2 {
 
         // 模擬 productDao.getAllProducts() 回傳預期結果
         Mockito.when(productDao.getAllProducts()).thenReturn(EXPECTED_LIST);
+        System.out.println("productDao.getAllProducts() = " + productDao.getAllProducts());
 
         // 建立請求物件
         final String uri = "/ProductController/getAllProducts";

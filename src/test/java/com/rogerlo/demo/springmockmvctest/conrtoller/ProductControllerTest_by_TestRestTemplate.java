@@ -18,7 +18,7 @@ import java.util.List;
  * 使用 TestRestRemplate 進行測試時，務必先使用 SpringBoot Main 啟動應用程式
  */
 @SpringBootTest
-public class ProductControllerTest {
+public class ProductControllerTest_by_TestRestTemplate {
 
     @BeforeEach
     void beforeEach(TestInfo testInfo){

@@ -13,3 +13,22 @@ Content-Type: application/json
 ### 測試 DELETE: deleteById
 DELETE http://localhost:8080/ProductController/delete/101
 Content-Type: application/json
+
+### 測試 POST: 新增 ProductVO
+POST http://localhost:8080/ProductController/addProduct
+Content-Type: application/json
+
+{
+  "id": 9999,
+  "name": "Switch OLED",
+  "price": 9700
+}
+
+### 測試 PATCH: 部分修改 ProductVO
+PATCH http://localhost:8080/ProductController/patchProduct/101
+Content-Type: application/json
+
+{
+  "name": "IPhone14",
+  "price": 35000
+}

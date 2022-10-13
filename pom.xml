@@ -42,6 +42,14 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- 解決 TestRestTemplate 無法 PATCH 問題 -->
+        <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.13</version>
+        </dependency>
+
     </dependencies>
 
     <build>

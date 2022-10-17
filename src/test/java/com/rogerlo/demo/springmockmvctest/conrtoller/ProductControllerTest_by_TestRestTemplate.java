@@ -57,7 +57,8 @@ public class ProductControllerTest_by_TestRestTemplate {
     @Test
     @DisplayName("測試使用 testRestTemplate 新增 Product")
     void test_002() throws URISyntaxException {
-        final String urlTemplate = "http://localhost:{0}/ProductController/addProduct";
+        // final String urlTemplate = "http://localhost:{0}/ProductController/addProduct";
+        final String urlTemplate = "/ProductController/addProduct"; // 可以不用加 IP:Port
         final String api_url = MessageFormat.format(urlTemplate, String.valueOf(randomServerPort));
         URI uri = new URI(api_url);
 

@@ -1,5 +1,6 @@
 package com.rogerlo.demo.springmockmvctest.conrtoller;
 
+import com.google.gson.Gson;
 import com.rogerlo.demo.springmockmvctest.model.ProductVO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -53,8 +54,31 @@ public class ProductControllerTest_MockMVC {
     }
 
     @Test
-    @DisplayName("測試使用 MockMVC 發送請求，使用 andExpect 驗證")
+    @DisplayName("測試使用 MockMVC 發送 POST 請求 - /addProduct")
     void test_002() throws Exception {
+        // System.out.println("mockMvc = " + mockMvc);
+
+        ProductVO productVOAdd = ProductVO.builder().id(777).name("PS5").price(35000).build();
+        String jsonStrForAdd = new Gson().toJson(productVOAdd);
+
+        final String uri = "/ProductController/addProduct";
+
+        MvcResult result = mockMvc.perform(
+                MockMvcRequestBuilders.post(uri)
+                        .content(jsonStrForAdd) // 設定請求內容(Json-String)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON) // 請求本體
+        ) // 發送請求
+        .andReturn(); // 取得最後 response
+
+        int status = result.getResponse().getStatus();
+        System.out.println("result = " + result.getResponse().getContentAsString(StandardCharsets.UTF_8));
+        System.out.println("status = " + status);
+    }
+
+    @Test
+    @DisplayName("測試使用 MockMVC 發送請求，使用 andExpect 驗證")
+    void test_003() throws Exception {
 
         // 建立 HttpHeader
         HttpHeaders httpHeaders = new HttpHeaders();

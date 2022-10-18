@@ -1,0 +1,9 @@
+### 測試 POST: setUserIntoSession
+POST http://localhost:8080/UserController/setUserIntoSession
+Content-Type: application/x-www-form-urlencoded
+
+username=Kelly&password=qweasd1qaz
+
+
+### 測試 GET: UserController
+GET http://localhost:8080/UserController/getSessionUser/c2f7330b-9997-4ca7-b294-b604d5f11fda
